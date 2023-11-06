@@ -8,6 +8,19 @@ const temp_status=document.getElementById('temp_status');
 
 const datahide=document.querySelector('.middle_layer')
 
+// for day and date updating 
+// Get a new Date object
+let date = new Date();
+let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+let day = days[date.getDay()];
+let today_date = date.getDate();
+let month = months[date.getMonth()];
+let formatted_date = `${month} ${today_date < 10 ? '0' : ''}${today_date}`;
+document.getElementById('day').innerText = day;
+document.getElementById('today_data').innerText = formatted_date;
+
+
 
 
 const getInfo=async(event)=>{
@@ -25,7 +38,8 @@ const getInfo=async(event)=>{
             const arrData=[data]
 
             city_name.innerText=`${arrData[0].name},${arrData[0].sys.country}`;
-            temp_real_val.innerText=arrData[0].main.temp;
+            temp_real_val.innerText=(arrData[0].main.temp -273.15).toFixed(2);
+            
           
 
             const tempMood=arrData[0].weather[0].main;
